@@ -50,11 +50,17 @@ class _NotesScreenState extends State<NotesScreen> {
           ),
           list.isEmpty
               ? Container(
-                height: MediaQuery.of(context).size.height-200,
-                child: const Center(
-                    child: Text('No Texts',style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.w600),),
+                  height: MediaQuery.of(context).size.height - 200,
+                  child: const Center(
+                    child: Text(
+                      'No Texts',
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
-              )
+                )
               : Expanded(
                   child: ListView.builder(
                     itemCount: list.length,
