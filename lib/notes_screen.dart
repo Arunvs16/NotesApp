@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:just_login/add_note.dart';
 import 'package:just_login/model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,12 +16,12 @@ class _NotesScreenState extends State<NotesScreen> {
   late SharedPreferences sharedPreferences;
   getData() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    List<String>? StringList = sharedPreferences.getStringList('list');
-    print(StringList);
-    if (StringList != null) {
+    List<String>? stringList = sharedPreferences.getStringList('list');
+    print(stringList);
+    if (stringList != null) {
       setState(() {
         list =
-            StringList.map((item) => Notes.fromMap(jsonDecode(item))).toList();
+            stringList.map((item) => Notes.fromMap(jsonDecode(item))).toList();
       });
     }
   }
@@ -53,7 +52,7 @@ class _NotesScreenState extends State<NotesScreen> {
                   height: MediaQuery.of(context).size.height - 200,
                   child: const Center(
                     child: Text(
-                      'No Texts',
+                      'Add Your Texts',
                       style: TextStyle(
                           color: Colors.red,
                           fontSize: 20,
@@ -95,16 +94,13 @@ class _NotesScreenState extends State<NotesScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddNotes()),
-          );
+          Navigator.pushNamed(context, './add_note');
         },
+        backgroundColor: Colors.blue.shade300,
         child: const Icon(
           Icons.add,
           color: Colors.white,
         ),
-        backgroundColor: Colors.blue.shade300,
       ),
     );
   }

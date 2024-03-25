@@ -19,11 +19,11 @@ class _AddNotesState extends State<AddNotes> {
   late SharedPreferences sharedPreferences;
   void setData() async {
     sharedPreferences = await SharedPreferences.getInstance();
-    List<String>? StringList = sharedPreferences.getStringList('list');
-    if (StringList != null) {
+    List<String>? stringList = sharedPreferences.getStringList('list');
+    if (stringList != null) {
       setState(() {
         list =
-            StringList.map((item) => Notes.fromMap(jsonDecode(item))).toList();
+            stringList.map((item) => Notes.fromMap(jsonDecode(item))).toList();
       });
     }
   }
@@ -84,9 +84,9 @@ class _AddNotesState extends State<AddNotes> {
           ElevatedButton(
             onPressed: () {
               list.add(Notes(title: title.text, description: description.text));
-              List<String> StringList =
+              List<String> stringList =
                   list.map((item) => jsonEncode(item.toMap())).toList();
-              sharedPreferences.setStringList('list', StringList);
+              sharedPreferences.setStringList('list', stringList);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => const NotesScreen()));
             },
